@@ -16,16 +16,19 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private EditText num;
     private LocationManager lmgr;
     private MyListener listener;
+    private TextView urname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         lmgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         listener = new MyListener();
 
+        urname = findViewById(R.id.hello);
         num = findViewById(R.id.num);
         webView = findViewById(R.id.webview);
         initWebView();
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         @JavascriptInterface
         public void callFromJS(String urname){
             Log.v("brad", "Hello, " + urname);
+            MainActivity.this.urname.setText("Hello, " + urname);
         }
     }
 
@@ -104,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initWebView(){
-        WebViewClient webViewClient = new WebViewClient();
+        MyClient webViewClient = new MyClient();
         webView.setWebViewClient(webViewClient);
 
         WebSettings settings = webView.getSettings();
@@ -122,6 +127,14 @@ public class MainActivity extends AppCompatActivity {
 
         //webView.loadUrl("https://www.iii.org.tw");
         webView.loadUrl("file:///android_asset/brad.html");
+    }
+
+    private class MyClient extends WebViewClient {
+
+    }
+
+    private class MyCClient extends WebChromeClient {
+        
     }
 
     @Override
