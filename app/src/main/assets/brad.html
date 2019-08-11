@@ -8,6 +8,12 @@
     function test1(){
         alert("Hello, World");
     }
+
+    function test2(){
+        var urname = document.getElementById("urname").value;
+        brad.callFromJS(urname);
+    }
+
 </script>
 <button type="button" onclick="test1()" class="btn btn-primary">Primary</button>
 
@@ -20,6 +26,10 @@
 <a href="map.html">
 <img src="imgs/android.jpg" />
 </a>
+<hr>
+<input type="text" id="urname" />
+<button type="button" onclick="test2()" class="btn btn-primary">OK</button>
+
 
 
 

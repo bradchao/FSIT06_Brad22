@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -47,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webview);
         initWebView();
     }
+
+    public class MyJSObject {
+
+        @JavascriptInterface
+        public void callFromJS(String urname){
+            Log.v("brad", "Hello, " + urname);
+        }
+    }
+
 
     //    @Override
     //@SuppressLint("MissingPermission")
@@ -106,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(true);
+
+        webView.addJavascriptInterface(new MyJSObject(), "brad");
 
 
         //webView.loadUrl("https://www.iii.org.tw");
