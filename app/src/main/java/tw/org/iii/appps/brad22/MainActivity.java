@@ -9,15 +9,18 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
+    private EditText num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        num = findViewById(R.id.num);
         webView = findViewById(R.id.webview);
         initWebView();
     }
@@ -28,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
+
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(true);
 
 
         //webView.loadUrl("https://www.iii.org.tw");
@@ -49,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void reload(View view) {
         webView.reload();
+    }
+
+    public void lottery(View view) {
+        webView.loadUrl("javascript:test1(" + num.getText().toString() + ")");
     }
 
 //    @Override
